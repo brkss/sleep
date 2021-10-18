@@ -1,16 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+} from "typeorm";
+import { ObjectType, Field } from "type-graphql";
+import { Sleep } from "./Sleep";
 
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+@ObjectType()
+@Entity("users")
+export class User extends BaseEntity {
+  @Field()
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-  @Column()
-  firstName: string;
+  @Field({ nullable: true })
+  @Column({ unique: true, nullable: true })
+  email?: string;
 
-  @Column()
-  lastName: string;
+  @Field(() => Date)
+  @CreateDateColumn()
+  created_at: Date;
 
-  @Column()
-  age: number;
+  @Field(() => [Sleep])
+  @OneToMany(() => Sleep, (sleeps) => sleeps.user)
+  sleeps: Sleep[];
 }

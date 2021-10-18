@@ -9,35 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const typeorm_1 = require("typeorm");
+exports.Sleep = void 0;
 const type_graphql_1 = require("type-graphql");
-const Sleep_1 = require("./Sleep");
-let User = class User extends typeorm_1.BaseEntity {
+const typeorm_1 = require("typeorm");
+const User_1 = require("./User");
+let Sleep = class Sleep extends typeorm_1.BaseEntity {
 };
 __decorate([
     (0, type_graphql_1.Field)(),
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Sleep.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)({ nullable: true }),
-    (0, typeorm_1.Column)({ unique: true, nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
+    (0, type_graphql_1.Field)(() => Date),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Sleep.prototype, "bedTime", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => Date),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Sleep.prototype, "wakeUp", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => Date),
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "created_at", void 0);
+], Sleep.prototype, "created_at", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => [Sleep_1.Sleep]),
-    (0, typeorm_1.OneToMany)(() => Sleep_1.Sleep, (sleeps) => sleeps.user),
-    __metadata("design:type", Array)
-], User.prototype, "sleeps", void 0);
-User = __decorate([
+    (0, type_graphql_1.Field)(() => User_1.User),
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.sleeps, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    }),
+    __metadata("design:type", User_1.User)
+], Sleep.prototype, "user", void 0);
+Sleep = __decorate([
     (0, type_graphql_1.ObjectType)(),
-    (0, typeorm_1.Entity)("users")
-], User);
-exports.User = User;
-//# sourceMappingURL=User.js.map
+    (0, typeorm_1.Entity)("sleep")
+], Sleep);
+exports.Sleep = Sleep;
+//# sourceMappingURL=Sleep.js.map
