@@ -21,14 +21,14 @@ __decorate([
     __metadata("design:type", String)
 ], Sleep.prototype, "id", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => Date),
+    (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Sleep.prototype, "bedTime", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => Date),
+    (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Sleep.prototype, "wakeUp", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => Date),

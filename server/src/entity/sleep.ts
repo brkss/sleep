@@ -16,13 +16,13 @@ export class Sleep extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Field(() => Date)
+  @Field(() => String)
   @Column()
-  bedTime: Date;
+  bedTime: string;
 
-  @Field(() => Date)
+  @Field(() => String)
   @Column()
-  wakeUp: Date;
+  wakeUp: string;
 
   @Field(() => Date)
   @CreateDateColumn()

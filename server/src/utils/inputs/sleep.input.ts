@@ -2,9 +2,9 @@ import { InputType, Field } from "type-graphql";
 
 @InputType()
 export class CreateSleepInput {
-  @Field(() => Date)
-  bedTime: Date;
+  @Field(() => String)
+  bedTime: string;
 
-  @Field(() => Date)
-  wakeUp: Date;
+  @Field(() => String)
+  wakeUp: string;
 }

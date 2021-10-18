@@ -16,15 +16,44 @@ exports.SleepResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const inputs_1 = require("../utils/inputs");
 const valid_md_1 = require("../utils/middlewares/valid.md");
+const Sleep_1 = require("../entity/Sleep");
+const User_1 = require("../entity/User");
 let SleepResolver = class SleepResolver {
+    async sleeps(ctx) {
+        const user = await User_1.User.findOne({ where: { id: ctx.payload.uid } });
+        const sleeps = await Sleep_1.Sleep.find({ where: { user: user } });
+        return sleeps;
+    }
     async createSleep(data, ctx) {
-        console.log(ctx);
         if (!data || !data.wakeUp || !data.bedTime) {
+            return false;
+        }
+        const user = await User_1.User.findOne({ where: { id: ctx.payload.uid } });
+        if (!user) {
+            return false;
+        }
+        try {
+            const sleep = new Sleep_1.Sleep();
+            sleep.bedTime = data.bedTime;
+            sleep.wakeUp = data.wakeUp;
+            sleep.user = user;
+            await sleep.save();
+        }
+        catch (e) {
+            console.log("error accured creatiing sleep record => ", e);
             return false;
         }
         return true;
     }
 };
+__decorate([
+    (0, type_graphql_1.UseMiddleware)(valid_md_1.isValid),
+    (0, type_graphql_1.Query)(() => [Sleep_1.Sleep]),
+    __param(0, (0, type_graphql_1.Ctx)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], SleepResolver.prototype, "sleeps", null);
 __decorate([
     (0, type_graphql_1.UseMiddleware)(valid_md_1.isValid),
     (0, type_graphql_1.Mutation)(() => Boolean),

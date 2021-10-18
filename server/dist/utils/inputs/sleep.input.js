@@ -14,12 +14,12 @@ const type_graphql_1 = require("type-graphql");
 let CreateSleepInput = class CreateSleepInput {
 };
 __decorate([
-    (0, type_graphql_1.Field)(() => Date),
-    __metadata("design:type", Date)
+    (0, type_graphql_1.Field)(() => String),
+    __metadata("design:type", String)
 ], CreateSleepInput.prototype, "bedTime", void 0);
 __decorate([
-    (0, type_graphql_1.Field)(() => Date),
-    __metadata("design:type", Date)
+    (0, type_graphql_1.Field)(() => String),
+    __metadata("design:type", String)
 ], CreateSleepInput.prototype, "wakeUp", void 0);
 CreateSleepInput = __decorate([
     (0, type_graphql_1.InputType)()

@@ -23,7 +23,7 @@ exports.GenerateToken = void 0;
 const jwt = __importStar(require("jsonwebtoken"));
 const GenerateToken = (uid) => {
     const token = jwt.sign({ uid: uid }, process.env.TOKEN_SECRET, {
-        expiresIn: "2h",
+        expiresIn: "30s",
     });
     return token;
 };
