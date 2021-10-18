@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenerateToken = void 0;
 const jwt = __importStar(require("jsonwebtoken"));
 const GenerateToken = (uid) => {
-    const token = jwt.sign({ uid: uid }, "wertyuiopdfghopsadkfhkdweiruoiwerut", {
+    const token = jwt.sign({ uid: uid }, process.env.TOKEN_SECRET, {
         expiresIn: "2h",
     });
     return token;

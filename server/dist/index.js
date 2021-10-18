@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const express_1 = __importDefault(require("express"));
@@ -14,8 +15,9 @@ const resolvers_1 = require("./resolvers");
     const app = (0, express_1.default)();
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({
-            resolvers: [resolvers_1.UserResolver],
+            resolvers: [resolvers_1.UserResolver, resolvers_1.SleepResolver],
         }),
+        context: ({ req, res }) => ({ req, res }),
     });
     apolloServer.applyMiddleware({ app });
     app.get("/", (_, res) => {
